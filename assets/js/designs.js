@@ -1,3 +1,4 @@
+
 // Select color input
 var pickedColor = $("#colorPicker");
 // Select size input
@@ -8,10 +9,13 @@ var resetButton = $("input[type='reset']");
 var tableCanva = $("#pixelCanvas");
 const height = $("#inputHeight");
 const width = $("#inputWeight");
+defaul();
+
 
 // When size is submitted by the user, call makeGrid()
 $(submitButton).on("click", function(event){
 	event.preventDefault();
+  tableCanva.empty();
 	makeGrid(width,height);
 	
 });
@@ -33,7 +37,9 @@ function makeGrid(colNO,rowNo) {
 //reset button to reset the input values and clear the grid
 $(resetButton).on("click", function(){
 
-tableCanva.remove();
+tableCanva.empty();
+$("#randomPicker").css("background-color", "#faebd7");
+
 
 });
 //draw with a color depending on the user selection
@@ -47,10 +53,14 @@ $("#colorPicker").change(function(){
 
 $("#randomPicker").on("click", function(){
 	let random = randomColor();
+	$(this).css("background-color", random);
+
 	coloring(random);
 });
 
 function coloring(color){
+	$(tableCanva).css("background-color", "white");
+
     tableCanva.on("click","td", function(){
 	$(this).css("background-color", color);
 });
@@ -68,3 +78,7 @@ function randomColor(){
  	return "rgb(" + r + ", " + g + ", " + b + ")";
 
  }
+function defaul(){
+
+	coloring(pickedColor.val());
+}
